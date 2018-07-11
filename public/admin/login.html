@@ -8,8 +8,9 @@
   <title>Document</title>
   <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.css">
 </head>
-
+<!-- 注意写之前先开分支写！！！！ -->
 <body class="body_bg">
   <div class="container">
     <!-- 组件 面板中找模板 -->
@@ -27,15 +28,17 @@
             <div class="form-group">
               <label for="username" class="col-sm-3 control-label">用户名</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名">
               </div>
             </div>
             <div class="form-group">
               <label for="password" class="col-sm-3 control-label">密码</label>
               <div class="col-sm-9">
-                <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
               </div>
             </div>
+
+            
             <div class="form-group">
               <!-- 对齐问题可以通过栅格系统解决 -->
               <div class="col-sm-offset-3 col-sm-6">
@@ -52,7 +55,8 @@
 
   <script src="./lib/jquery/jquery.js"></script>
   <script src="./lib/bootstrap/js/bootstrap.js"></script>
-
+  <script src="./lib/bootstrap-validator/js/bootstrapValidator.js"></script>
+  <script src="./js/login.js"></script>
 </body>
 
 </html>
