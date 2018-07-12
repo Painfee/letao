@@ -2,6 +2,125 @@
   background-color: #222d32;
 }
 
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+.clearfix::before,
+.clearfix::after {
+  content: '';
+  display: table;
+}
+.clearfix::after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+
 .mt_150 {
   margin-top: 150px;
+}
+
+html,body {
+  height: 100%;
+}
+
+/* 为什么这样添加 */
+body {
+  transition: all 1s;
+  padding-left: 180px;
+}
+body.active {
+  padding-left: 0px;
+}
+.lt_aside.active {
+  left: -180px;
+}
+
+ul,ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lt_aside {
+  background-color: #222d32;
+  height: 100%;
+  width: 180px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* 切换动画 */
+  transition: all 1s;
+}
+
+.lt_aside .brand a {
+  display: block;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  background-color: #367fa9;
+}
+
+.lt_aside .user img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 30px auto 0;
+}
+.lt_aside .user p {
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+}
+
+.lt_aside a {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 14px;
+  padding-left: 50px;
+  border-left: 1px solid transparent;
+}
+.lt_aside .nav .second a {
+  padding-left: 70px;
+}
+.lt_aside .nav a.active {
+  border-left: 1px solid #337ab7;
+  background-color: #1d1f21;
+  box-sizing: border-box;
+}
+
+.lt_main {
+  width: 100%;
+  height: 100%;
+  /* background-color: green; */
+}
+.lt_main .lt_header { 
+  height: 50px;
+  line-height: 50px;
+  background-color: #3c8dbc;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+.lt_header a {
+  color: #fff;
+  font-size: 18px;
+}
+
+.charts_left,
+.charts_right {
+  width: 45%;
+  height: 400px;
 }
