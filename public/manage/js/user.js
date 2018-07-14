@@ -9,17 +9,17 @@ $(function () {
   var pageSize = 5;
 
   //分页渲染数据
-  function render(){
+  function render() {
 
     //发送ajax请求，获取数据
     $.ajax({
-      type:"get",
-      url:"/user/queryUser",
-      data:{
-        page:currentPage,
-        pageSize:pageSize
+      type: "get",
+      url: "/user/queryUser",
+      data: {
+        page: currentPage,
+        pageSize: pageSize
       },
-      success:function (info) {
+      success: function (info) {
         console.log(info);
         //把数据渲染到tbody中
         var html = template("tpl", info);
@@ -27,10 +27,10 @@ $(function () {
 
         //渲染分页
         $("#paginator").bootstrapPaginator({
-          bootstrapMajorVersion:3,
+          bootstrapMajorVersion: 3,
           currentPage: currentPage,
-          totalPages: Math.ceil(info.total/pageSize),
-          onPageClicked:function (a,b,c,page) {
+          totalPages: Math.ceil(info.total / pageSize),
+          onPageClicked: function (a, b, c, page) {
             currentPage = page;
             render();
           }
@@ -55,21 +55,21 @@ $(function () {
 
     //获取到对应的id
     var id = $(this).parent().data("id");
-    var isDelete = $(this).hasClass("btn-danger")?0:1;
+    var isDelete = $(this).hasClass("btn-danger") ? 0 : 1;
 
     //给确定按钮注册事件
     $(".btn_confirm").off().on("click", function () {
       //发送ajax请求
       $.ajax({
-        type:"post",
-        url:"/user/updateUser",
-        data:{
-          id:id,
-          isDelete:isDelete
+        type: "post",
+        url: "/user/updateUser",
+        data: {
+          id: id,
+          isDelete: isDelete
         },
-        success:function (info) {
+        success: function (info) {
 
-          if(info.success){
+          if (info.success) {
             //关闭模态框
             $("#userModal").modal("hide");
 

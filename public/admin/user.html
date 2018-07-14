@@ -73,16 +73,49 @@
         <li class="active">用户管理</li>
       </ol>
 
-      <!-- 每个页面具体的内容 -->
-      <div class="lt_content">
+      <!-- user具体的内容 -->
+      <!-- 
+        思路：1 首先git一个分支，写出表格的静态页面，注意这里给th 加上比例的宽度
+              并且居中、对齐（vertical-align：middle），注意这里有优先级关系
+              2 引入artTemplate插件，准备模板，准备数据，这里准备数据渲染是要经常
+              用的，所以直接封装render函数，里面用ajax做，注意看接口文档需要哪些参
+              数，提前获取，该写在全局的写在全局，成功的回调函数里面用分页插件分页，
+              要使用分页插件就要先想到要用2个参数 pageSize和currentPage，并且渲染
+              3 点击操作里面的按钮，动态渲染结果，先给按钮注册事件委托，由按钮来执行，
+              这里的this还是指向按钮，点击后，弹出模态框，注意这里要改变模态框id，因为
+              它的id会用来显示和隐藏它自己，不要和其它页面的搞混了，然后对照接口文档，
+              点击模态框的确认按钮（用到了就要改一个唯一的id注册事件），ajax异步处理，
+              成功的回调函数里面再次渲染
 
+       -->
+      <div class="lt_content">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="10%">序号</th>
+              <th width="30%">用户名</th>
+              <th width="20%">手机号</th>
+              <th width="20%">状态</th>
+              <th width="20%">操作</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- 挖个坑 -->
+          </tbody>
+        </table>
+
+        <!-- 分页的盒子 -->
+        <div class="text-right">
+          <ul id="paginator"></ul>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- bootstrap插件  javascript插件   模态框  -->
   <!-- bootstrap中， role aria  sr-only: 盲人设备 -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="logoutModal">
+  <div class="modal fade" tabindex="-1" role="dialog" id="userModal">
     <!-- 加类设置大小，改变文本-->
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
@@ -96,12 +129,12 @@
           <!-- 加类设置颜色 -->
           <p class="text-danger">
             <span class="glyphicon glyphicon-info-sign"></span>
-            <span> 您确定要退出后台管理系统吗？</span>
+            <span> 您确定要执行此操作吗？</span>
           </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary btn_logout">退出</button>
+          <button type="button" class="btn btn-primary btn_confirm">确定</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -110,15 +143,37 @@
   </div>
   <!-- /.modal -->
 
+  <!-- user模板 -->
+  <script type="text/html" id="user-tpl">
+    {{ each rows v i }}
+    <tr>
+      <!-- 注意这里序号渲染需要用后台传来的参数算一下 -->
+      <td>{{ (page-1)*size+i+1 }}</td>
+      <td>{{ v.username }}</td>
+      <td>{{ v.mobile }}</td>
+      <td>{{ v.isDelete == 1 ? "正常" : "禁用" }}</td>
+      <td data-id="{{ v.id }}">
+        <!-- 下面2个类可以在按钮里面找得到 -->
+        {{ if v.isDelete == 1 }}
+        <button class="btn btn-danger btn-sm">禁用</button>
+        {{ else }}
+        <button class="btn btn-success btn-sm">启用</button>
+        {{ /if }}
+      </td>
+    </tr>
+    {{ /each }}
+  </script>
 
 
   <script src="lib/jquery/jquery.js"></script>
   <script src="lib/bootstrap/js/bootstrap.js"></script>
   <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
+  <script src="lib/bootstrap-paginator/bootstrap-paginator.js"></script>
   <script src="lib/nprogress/nprogress.js"></script>
+  <script src="lib/artTemplate/template-web.js"></script>
   <!-- <script src="lib/echarts/echarts.min.js"></script> -->
   <script src="js/common.js"></script>
-  <script src="js/login.js"></script>
+  <script src="js/user.js"></script>
   <!-- <script src="js/index.js"></script> -->
 </body>
 

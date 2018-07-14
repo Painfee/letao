@@ -75,14 +75,31 @@
 
       <!-- 每个页面具体的内容 -->
       <div class="lt_content">
+        <div class="btn btn-default mb_20 btn_add">添加分类</div>
 
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="20%">序号</th>
+              <th width="80%">分类</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 挖个坑 -->
+          </tbody>
+        </table>
+
+        <!-- 分页盒子 -->
+        <div class="text-right">
+          <ul id="paginator"></ul>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- bootstrap插件  javascript插件   模态框  -->
   <!-- bootstrap中， role aria  sr-only: 盲人设备 -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="logoutModal">
+  <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
     <!-- 加类设置大小，改变文本-->
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
@@ -90,19 +107,21 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title">温馨提示</h4>
+          <h4 class="modal-title">添加分类</h4>
         </div>
-        <div class="modal-body">
-          <!-- 加类设置颜色 -->
-          <p class="text-danger">
-            <span class="glyphicon glyphicon-info-sign"></span>
-            <span> 您确定要退出后台管理系统吗？</span>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary btn_logout">退出</button>
-        </div>
+        <form>
+          <div class="modal-body">
+            <!-- 这里也用了bootstrap 里 全局CSS样式的 表单 -->
+            <div class="form-group">
+              <input type="text" class="form-control" name="categoryName" placeholder="请输入一级分类的名称">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <!-- 表单提交要改按钮为submit -->
+            <button type="submit" class="btn btn-primary btn_add">添加</button>
+          </div>
+        </form>
       </div>
       <!-- /.modal-content -->
     </div>
@@ -110,16 +129,23 @@
   </div>
   <!-- /.modal -->
 
-
+  <script type="text/html" id="first-tpl">
+    {{ each rows v i }}
+    <tr>
+      <td>{{ (page-1)*size+i+1 }}</td>
+      <td>{{ v.categoryName }}</td>
+    </tr>
+    {{ /each }}
+  </script>
 
   <script src="lib/jquery/jquery.js"></script>
   <script src="lib/bootstrap/js/bootstrap.js"></script>
   <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
+  <script src="lib/bootstrap-paginator/bootstrap-paginator.js"></script>
   <script src="lib/nprogress/nprogress.js"></script>
-  <!-- <script src="lib/echarts/echarts.min.js"></script> -->
+  <script src="lib/artTemplate/template-web.js"></script>
   <script src="js/common.js"></script>
-  <script src="js/login.js"></script>
-  <!-- <script src="js/index.js"></script> -->
+  <script src="js/first.js"></script>
 </body>
 
 </html>
