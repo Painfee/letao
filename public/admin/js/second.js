@@ -108,6 +108,7 @@ $(function () {
       data: $("form").serialize(),
       success: function(info){
         if(info.success){
+          // 隐藏模态框，使page=1，重新渲染第一页
           $("#addModal").modal("hide");
           page = 1;
           render();

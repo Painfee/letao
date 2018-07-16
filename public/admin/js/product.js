@@ -40,6 +40,7 @@ $(function () {
   // 图片上传成功
   $("#fileupload").fileupload({
     done: function (e, data) {
+      // 限制上传图片数量
       if (imgs.length == 3) {
         return;
       }
